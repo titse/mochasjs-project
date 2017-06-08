@@ -14,10 +14,16 @@ describe("Color Code Converter API", function() {
     it("returns status 200", function() {
       request(url, function(error, response, body) {
         expect(response.statusCode).to.equal(200);
+        done();
       });
     });
 
-    it("returns the color in hex", function() {});
+    it("returns the color in hex", function() {
+        request(url, function(error, response, body) {
+            expect(body).to.equal("ffffff");
+            done();
+        });
+    });
 
   });
 
@@ -27,11 +33,34 @@ describe("Color Code Converter API", function() {
     it("returns status 200", function() {
       request(url, function(error, response, body) {
         expect(response.statusCode).to.equal(200);
+        done();
       });
     });
 
-    it("returns the color in RGB", function() {});
+    it("returns the color in RGB", function() {
+        request(url, function(error, response, body) {
+            expect(body).to.equal("[0, 255, 0]");
+            done();
+        });
+    });
 
   });
 
 });
+
+var http = require('http');
+
+this.server = http.createServer(function (req, res) {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('Hello, world!\n');
+});
+
+exports.listen = function () {
+  this.server.listen.apply(this.server, arguments);
+};
+
+exports.close = function (callback) {
+  this.server.close(callback);
+};
+
+
