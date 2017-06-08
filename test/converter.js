@@ -1,0 +1,41 @@
+/** 
+converter.js
+Description: test convert file
+Modules being used: chai, mocha
+Author Tiffany Tse
+*/
+"use strict";
+//import modules
+var expect = require('chai').expect;
+var converter = require('../app/AppConverter.js');
+// describe colors
+describe("Color Code Converter", function() {
+    describe("RGB to HEX conversion", function() {
+        it("converts the basic colors", function() {
+            //make colors
+            var redHex   = converter.rgbToHex(255, 0, 0);
+            var greenHex = converter.rgbToHex(0, 255, 0);
+            var blueHex  = converter.rgbToHex(0, 0, 255);
+            var yellowHex = converter.rgbToHex(255, 255, 0);
+            //expect keyword to compare the result of our feature's implementation and the result we expect to get
+            expect(redHex).to.equal("ff0000");
+            expect(greenHex).to.equal("00ff00");
+            expect(blueHex).to.equal("0000ff");
+            //expect(yellowHex).to.equal("#ffff00");
+        });
+    });
+    describe("RGB to HEX conversion", function() {
+        it("converts the basic colors", function() {
+            var red = converter.hexToRgb("ff0000");
+            var green = converter.hexToRgb("00ff00");
+            var blue  = converter.hexToRgb("0000ff");
+            var yellow = converter.hexToRgb("ffff000");
+
+            expect(red).to.deep.equal([255, 0, 0]);
+            expect(green).to.deep.equal([0, 255, 0]);
+            expect(blue).to.deep.equal([0, 0, 255]);
+            expect(yellow).to.deep.equal([255, 255, 0]);
+        });
+    });
+});
+
