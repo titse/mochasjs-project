@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "testing with mocha js",
   "main": "index.js",
+{
   "scripts": {
-    "test": "./node_modules/.bin/mocha --reporter spec"
-  },
+    "build": "babel index.js -d src",
+    "test": "cross-env NODE_ENV=test nyc mocha test.js",
+    "prepublish": "npm run build"
+  }
+},
   "author": "Tiffany",
   "license": "ISC",
   "dependencies": {
@@ -15,3 +19,15 @@
     "request": "^2.81.0"
   }
 }
+{
+  "nyc": {
+    "require": [
+      "babel-register"
+    ],
+    "reporter": [
+      "lcov",
+      "text"
+    ],
+    "sourceMap": false,
+    "instrument": false
+  }
